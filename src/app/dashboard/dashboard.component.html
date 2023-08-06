@@ -1,0 +1,24 @@
+<div class="dashboard">
+    <div class="dashboard-header">
+        <div class="profile-info">
+            <p class="profile-email">{{ currentUser.email }}</p>
+        </div>
+        <button (click)="logout()" class="logout-button">Logout</button>
+    </div>
+    <div class="task-list-header">
+        <button routerLink="/task" class="create-button">Create New Task</button>
+    </div>
+    <h2>Your Task List</h2>
+    <ul class="task-list">
+        <li *ngFor="let task of tasks" class="task-item">
+            <h3>{{ task.title }}</h3>
+            <p>Due Date: {{ task.dueDate | date }}</p>
+            <p>Status: {{ task.status }}</p>
+            <button (click)="updateTaskStatus(task.id, TaskStatus.InProgress)" *ngIf="task.status === TaskStatus.ToDo"
+                class="start-button">Start</button>
+            <button (click)="updateTaskStatus(task.id, TaskStatus.Done)" *ngIf="task.status === TaskStatus.InProgress"
+                class="complete-button">Complete</button>
+            <button (click)="goToTaskDetails(task.id)" class="details-button">Details</button>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,25 @@
+<div class="task-detail-container">
+    <h2>Task Details</h2>
+    <div class="task-info">
+        <p><strong>Title:</strong> {{ task.title }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+        <p><strong>Status:</strong> {{ task.status }}</p>
+        <p><strong>Assignee:</strong> {{ task.assigneeEmail }}</p>
+    </div>
+
+    <div class="task-comments">
+        <h3>Comments</h3>
+        <div>
+            <p>{{ task.comment?.text }}</p>
+            <p>{{ task.comment?.timestamp | date }}</p>
+        </div>
+        <div class="add-comment">
+            <textarea [(ngModel)]="newComment" placeholder="Enter your comment"></textarea>
+        </div>
+        <div class="flex-button">
+            <button class="comment" (click)="addComment()" [disabled]="!newComment">Submit</button>
+            <button type="button" routerLink="/dashboard" class="btn btn-secondary">Back to Task List</button>
+        </div>
+    </div>
+</div>

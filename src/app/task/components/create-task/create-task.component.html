@@ -1,0 +1,43 @@
+<div class="create-task-container">
+    <h2>Create New Task</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="createTask()" class="task-form">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" formControlName="title" class="form-control" required>
+            <div class="invalid-feedback" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+                Title is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description" class="form-control" required></textarea>
+            <div class="invalid-feedback"
+                *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+                Description is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dueDate">Due Date:</label>
+            <input type="date" id="dueDate" formControlName="dueDate" class="form-control" [min]="minDate" required>
+            <div class="invalid-feedback" *ngIf="taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched">
+                Please enter a valid due date.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assignTo">Assign To:</label>
+            <select id="assignTo" formControlName="assignToId" class="form-control" required>
+                <option value="">Select an Assignee</option>
+                <option *ngFor="let user of users" [value]="user.id">{{ user.email }}</option>
+            </select>
+            <div class="invalid-feedback"
+                *ngIf="taskForm.get('assignToId')?.invalid && taskForm.get('assignToId')?.touched">
+                Please select an assignee.
+            </div>
+        </div>
+        <div class="flex-button">
+            <button type="submit" [disabled]="taskForm.invalid" class="btn btn-primary">Create Task</button>
+            <button type="button" routerLink="/dashboard" class="btn btn-secondary mt-3 float-right">Back to Task
+                List</button>
+        </div>
+    </form>
+</div>
